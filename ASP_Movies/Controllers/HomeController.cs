@@ -45,6 +45,11 @@ namespace ASP_Movies.Controllers
 			return View();
 		}
 
+		public IActionResult Movie(string imdbId)
+		{
+			return View();
+		}
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{

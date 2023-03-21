@@ -32,5 +32,16 @@ namespace ASP_Movies.Services
 			}
 			return result;
 		}
+
+		public async Task<Movie> SearchByIdAsync(string id)
+		{
+			var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?i={id}%man&apikey={movieApiOptions.ApiKey}");
+			var result = await response.Content.ReadFromJsonAsync<Movie>();//????????????
+			if (result.Response == "False")
+			{
+				throw new Exception(result.Error);
+			}
+			return result;
+		}
 	}
 }
