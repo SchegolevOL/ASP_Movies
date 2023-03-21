@@ -1,4 +1,6 @@
 ﻿using ASP_Movies.Models;
+using ASP_Movies.Options;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace ASP_Movies.Services
@@ -12,10 +14,10 @@ namespace ASP_Movies.Services
 
 		public  HttpClient httpClient { get; set; }
 
-		public MovieApiService(IHttpClientFactory httpClientFactory)
+		public MovieApiService(IHttpClientFactory httpClientFactory, IOptions<MovieApiOptions>options)
 		{
-			BaseUrl = "https://omdbapi.com/";
-			ApiKey = "5b9b7798";
+			BaseUrl = options.Value.BaseUrl;
+			ApiKey = options.Value.ApiKey;
 			httpClient = httpClientFactory.CreateClient();
 		}
 
