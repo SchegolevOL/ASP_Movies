@@ -26,7 +26,10 @@ namespace ASP_Movies.Services
 		{
 			var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?s={title}%20man&apikey={movieApiOptions.ApiKey}");
 			var result = await response.Content.ReadFromJsonAsync<MovieApiResponse>();//????????????
-			
+			if (result.Response=="False")
+			{
+				throw new Exception(result.Error);
+			}
 			return result;
 		}
 	}

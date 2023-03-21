@@ -7,7 +7,7 @@ namespace ASP_Movies.Controllers
 {
 	public class HomeController : Controller
 	{
-		
+
 		private readonly IMovieApiService _movieApiService;
 
 		//public HomeController(ILogger<HomeController> logger)
@@ -26,8 +26,18 @@ namespace ASP_Movies.Controllers
 		}
 		public async Task<IActionResult> Search(string title)
 		{
-			ViewBag.MovieTitle = title;
-			var result = await _movieApiService.SearchByTitleAsync(title);
+			MovieApiResponse result;
+			try
+			{
+				ViewBag.MovieTitle = title;
+				result = await _movieApiService.SearchByTitleAsync(title);
+			}
+			catch (Exception e)
+			{
+				//e.Message = 
+				Console.WriteLine(e);
+				throw;
+			}
 			return View(result);
 		}
 		public IActionResult Detail()
