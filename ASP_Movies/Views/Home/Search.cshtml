@@ -1,0 +1,16 @@
+﻿@{
+	Layout = "_Layout";
+	ViewData["Title"] = "Search";
+}
+
+
+@if (!string.IsNullOrWhiteSpace(@ViewBag.MovieTitle))
+{
+	<h1>Search results by title: @ViewBag.MovieTitle</h1>
+
+	<p>@ViewBag.Result</p>
+}
+else
+{
+	<h3>No results!</h3>
+}
