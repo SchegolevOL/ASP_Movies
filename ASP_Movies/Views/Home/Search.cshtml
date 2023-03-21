@@ -3,8 +3,8 @@
 	ViewData["Title"] = "Search";
 }
 @model MovieApiResponse
-
-@if (Model.Response == "true")
+<div>@Model.Response</div>
+@if (!string.IsNullOrWhiteSpace(@ViewBag.MovieTitle) && Model.Response.Equals("True"))
 {
 	<h1>Search results by title: @ViewBag.MovieTitle</h1>
 	<p>@ViewBag.Result.</p>

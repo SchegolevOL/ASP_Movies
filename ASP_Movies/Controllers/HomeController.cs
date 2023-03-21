@@ -26,6 +26,7 @@ namespace ASP_Movies.Controllers
 		}
 		public async Task<IActionResult> Search(string title)
 		{
+			ViewBag.MovieTitle = title;
 			var result = await _movieApiService.SearchByTitleAsync(title);
 			return View(result);
 		}

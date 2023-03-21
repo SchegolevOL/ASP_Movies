@@ -8,13 +8,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IMovieApiService, MovieApiService>();//создается новый обект на каждое обращение
 //builder.Services.AddTransient<MovieApiService>();//при обращении создается один обект при выходе из контроллера уничтожается
 //builder.Services.AddSingleton<MovieApiService>();//обращение к классу один на весь проек все обращения идут к нему после использования уничтожается
-builder.Services.AddHttpClient();// регестрирует http клиент
-
-
-
-
+builder.Services.AddHttpClient();
 var app = builder.Build();
 
+
+Console.WriteLine("/////////");
+Console.WriteLine(builder.Configuration.GetSection("MovieApi").GetValue<string>("BaseUrl"));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -23,6 +22,7 @@ if (!app.Environment.IsDevelopment())
 	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
