@@ -7,7 +7,7 @@ namespace ASP_Movies.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+		
 		private readonly IMovieApiService _movieApiService;
 
 		//public HomeController(ILogger<HomeController> logger)
@@ -17,7 +17,7 @@ namespace ASP_Movies.Controllers
 
 		public HomeController(IMovieApiService movieApiService)
 		{
-			this._movieApiService = movieApiService;
+			_movieApiService = movieApiService;
 		}
 
 		public IActionResult Index()
@@ -29,10 +29,10 @@ namespace ASP_Movies.Controllers
 			
 			
 			ViewBag.MovieTitle = title;
-			ViewBag.Result = await _movieApiService.SearchByTitleAsync(title);
+			var result = await _movieApiService.SearchByTitleAsync(title);
 
 
-			return View();
+			return View(result);
 		}
 		public IActionResult Detail()
 		{

@@ -1,4 +1,7 @@
-﻿namespace ASP_Movies.Services
+﻿using ASP_Movies.Models;
+using Newtonsoft.Json;
+
+namespace ASP_Movies.Services
 {
 	
 
@@ -15,10 +18,12 @@
 			httpClient = new HttpClient();
 		}
 
-		public async Task<string> SearchByTitleAsync(string title)
+		public async Task<MovieApiResponse> SearchByTitleAsync(string title)
 		{
 			var response = await httpClient.GetAsync($"{BaseUrl}?s={title}%20man&apikey={ApiKey}");
-			var result = await response.Content.ReadAsStringAsync();
+			var result = await response.Content.ReadFromJsonAsync<MovieApiResponse>();//????????????
+
+			
 			return result;
 		}
 	}

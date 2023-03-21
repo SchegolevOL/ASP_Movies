@@ -1,7 +1,9 @@
-﻿namespace ASP_Movies.Services
+﻿using ASP_Movies.Models;
+
+namespace ASP_Movies.Services
 {
 	public interface IMovieApiService
 	{
-		Task<string> SearchByTitleAsync(string title);
+		Task<MovieApiResponse> SearchByTitleAsync(string title);
 	}
 }
