@@ -45,9 +45,10 @@ namespace ASP_Movies.Controllers
 			return View();
 		}
 
-		public IActionResult Movie(string imdbId)
+		public async Task<IActionResult> Movie(string id)
 		{
-			return View();
+			var result = await _movieApiService.SearchByIdAsync(id);
+			return View(result);
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
