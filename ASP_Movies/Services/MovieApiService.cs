@@ -11,11 +11,11 @@ namespace ASP_Movies.Services
 		public string ApiKey { get; set; }
 		public  HttpClient httpClient { get; set; }
 
-		public MovieApiService()
+		public MovieApiService(IHttpClientFactory httpClientFactory)
 		{
 			BaseUrl = "https://omdbapi.com/";
 			ApiKey = "5b9b7798";
-			httpClient = new HttpClient();
+			httpClient = httpClientFactory.CreateClient();// создание http клиента нужна регистрация в program.cs
 		}
 
 		public async Task<MovieApiResponse> SearchByTitleAsync(string title)
