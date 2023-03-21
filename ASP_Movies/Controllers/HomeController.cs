@@ -1,4 +1,5 @@
 ﻿using ASP_Movies.Models;
+using ASP_Movies.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -19,10 +20,12 @@ namespace ASP_Movies.Controllers
 		}
 		public async Task<IActionResult> Search(string title)
 		{
-
+			MovieApiService movieApiService = new MovieApiService();
 			
+			ViewBag.MovieTitle = title;
+			ViewBag.Result = await movieApiService.SearchByTitleAsync(title);
 
-			
+
 			return View();
 		}
 		public IActionResult Detail()

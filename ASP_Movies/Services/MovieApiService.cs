@@ -1,6 +1,8 @@
 ﻿namespace ASP_Movies.Services
 {
-	public class MovieApiService
+	
+
+	public class MovieApiService : IMovieApiService
 	{
 		public string BaseUrl { get; set; }
 		public string ApiKey { get; set; }
