@@ -19,7 +19,7 @@
 							<div class="card-body">
 								<h5 class="card-title">@item.Title</h5>
 								<p class="card-text">@item.Year</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+										<a class="btn btn-primary" asp-controller="Home" asp-action="Detail" asp-route-id="@item.imdbID">Detail</a>
 							</div>
 						</div>
 					 </div>

@@ -40,12 +40,8 @@ namespace ASP_Movies.Controllers
 			}
 			return View(result);
 		}
-		public IActionResult Detail()
-		{
-			return View();
-		}
-
-		public async Task<IActionResult> Movie(string id)
+		
+		public async Task<IActionResult> Detail(string id)
 		{
 			var result = await _movieApiService.SearchByIdAsync(id);
 			return View(result);
