@@ -11,18 +11,12 @@
 	<div class="container">
 		<div class="row">
 			
-				@foreach (var item in Model.Search)
+				@foreach (Movie item in Model.Search)
 				{
 					<div class="col-3">
-						<div class="card" style="width: 18rem;">
-							<img src="@item.Poster" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h5 class="card-title">@item.Title</h5>
-								<p class="card-text">@item.Year</p>
-										<a class="btn btn-primary" asp-controller="Home" asp-action="Detail" asp-route-id="@item.imdbID">Detail</a>
-							</div>
-						</div>
-					 </div>
+						<partial name="_MovieCardPartial" model="@item"/>
+					</div>
+					
 				}
 			
 		</div>

@@ -1,7 +1,6 @@
 ﻿using ASP_Movies.Models;
 using ASP_Movies.Options;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 
 namespace ASP_Movies.Services
 {
@@ -24,7 +23,7 @@ namespace ASP_Movies.Services
 
 		public async Task<MovieApiResponse> SearchByTitleAsync(string title)
 		{
-			var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?s={title}%20man&apikey={movieApiOptions.ApiKey}");
+			var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?s={title}&apikey={movieApiOptions.ApiKey}");
 			var result = await response.Content.ReadFromJsonAsync<MovieApiResponse>();//????????????
 			if (result.Response=="False")
 			{
@@ -36,6 +35,7 @@ namespace ASP_Movies.Services
 		public async Task<Movie> SearchByIdAsync(string id)
 		{
 			var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?i={id}&apikey={movieApiOptions.ApiKey}");
+
 			var result = await response.Content.ReadFromJsonAsync<Movie>();//????????????
 			if (result.Response == "False")
 			{

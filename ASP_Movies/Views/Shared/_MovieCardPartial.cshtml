@@ -1,0 +1,20 @@
+﻿@model Movie
+
+	<div class="card" style="width: 18rem;">
+		<img src="@Model.Poster" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title">@Model.Title</h5>
+			<p class="card-text">@Model.Year</p>
+			@if (Model.Plot==null)
+			{
+			<a class="btn btn-primary" 
+			   asp-controller="Home" 
+			   asp-action="Detail" 
+			   asp-route-id="@Model.imdbID">
+				Detail
+			</a>
+			}
+
+			
+		</div>
+	</div>
