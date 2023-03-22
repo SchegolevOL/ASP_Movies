@@ -38,7 +38,6 @@ namespace ASP_Movies.Services
 		public async Task<Movie> SearchByIdAsync(string id)
 		{
 			Movie result;
-
 			if (!memoryCache.TryGetValue(id, out result))
 			{
 				var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?i={id}&apikey={movieApiOptions.ApiKey}");
