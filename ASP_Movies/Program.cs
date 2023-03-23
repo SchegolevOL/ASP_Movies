@@ -1,3 +1,4 @@
+using ASP_Movies.Extension;
 using ASP_Movies.Options;
 using ASP_Movies.Services;
 
@@ -6,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IMovieApiService, MovieApiService>();//создается новый обект на каждое обращение
+//builder.Services.AddScoped<IMovieApiService, MovieApiService>();//создается новый обект на каждое обращение
 //builder.Services.AddTransient<MovieApiService>();//при обращении создается один обект при выходе из контроллера уничтожается
 //builder.Services.AddSingleton<MovieApiService>();//обращение к классу один на весь проек все обращения идут к нему после использования уничтожается
 builder.Services.AddHttpClient();
@@ -14,13 +15,18 @@ builder.Services.AddMemoryCache();//подключение кыширования
 
 
 
-builder.Services.Configure<MovieApiOptions>(options =>
+//builder.Services.Configure<MovieApiOptions>(options =>
+//{
+//	options.ApiKey = builder.Configuration["MovieApi:ApiKey"];
+//	options.BaseUrl = builder.Configuration["MovieApi:BaseUrl"];
+
+//});
+builder.Services.AddMovieApi(options =>
 {
 	options.ApiKey = builder.Configuration["MovieApi:ApiKey"];
 	options.BaseUrl = builder.Configuration["MovieApi:BaseUrl"];
 
 });
-
 
 
 Console.WriteLine("/////////");

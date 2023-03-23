@@ -32,7 +32,7 @@ namespace ASP_Movies.Services
 			MovieApiResponse result;
 			if (!memoryCache.TryGetValue(title, out result))
 			{
-				var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?s={title}20%man&apikey={movieApiOptions.ApiKey}");
+				var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?s={title}&apikey={movieApiOptions.ApiKey}");
 				result = await response.Content.ReadFromJsonAsync<MovieApiResponse>();
 
 				
