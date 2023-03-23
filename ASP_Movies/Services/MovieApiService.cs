@@ -1,4 +1,5 @@
-﻿using ASP_Movies.Models;
+﻿using System.Text.Json;
+using ASP_Movies.Models;
 using ASP_Movies.Options;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
@@ -13,7 +14,7 @@ namespace ASP_Movies.Services
 		//public string ApiKey { get; set; }
 		public MovieApiOptions movieApiOptions { get; set; }
 		public HttpClient httpClient { get; set; }
-		public IMemoryCache memoryCache { get; set; }
+		public IMemoryCache memoryCache { get; set; }//кэш
 
 		public MovieApiService(IHttpClientFactory httpClientFactory, IOptions<MovieApiOptions> options, IMemoryCache memoryCache)
 		{
@@ -26,12 +27,24 @@ namespace ASP_Movies.Services
 
 		public async Task<MovieApiResponse> SearchByTitleAsync(string title)
 		{
-			var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?s={title}&apikey={movieApiOptions.ApiKey}");
-			var result = await response.Content.ReadFromJsonAsync<MovieApiResponse>();
-			if (result.Response == "False")
+			title = title.ToLower();//все строчные
+
+			MovieApiResponse result;
+			if (!memoryCache.TryGetValue(title, out result))
 			{
-				throw new Exception(result.Error);
+				var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?s={title}20%man&apikey={movieApiOptions.ApiKey}");
+				result = await response.Content.ReadFromJsonAsync<MovieApiResponse>();
+
+				
+				if (result.Response == "False")
+				{
+					throw new Exception(result.Error);
+				}
+
+				var timeExpire = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromDays(1));//время жизни кэша
+				memoryCache.Set(title, result, timeExpire );
 			}
+
 			return result;
 		}
 

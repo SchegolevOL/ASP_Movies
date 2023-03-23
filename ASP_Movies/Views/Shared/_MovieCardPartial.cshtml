@@ -1,7 +1,7 @@
 ﻿@model Movie
 
 	<div class="card" style="width: 18rem;">
-		<img src="@Model.Poster" class="card-img-top" alt="...">
+		<img src="@Model.Poster" @*прослушка события error->*@ onerror="event.target.src='/images/on-image.png'" class="card-img-top" alt="...">
 		<div class="card-body">
 			<h5 class="card-title">@Model.Title</h5>
 			<p class="card-text">@Model.Year</p>

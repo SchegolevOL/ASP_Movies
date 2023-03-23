@@ -11,12 +11,17 @@ builder.Services.AddScoped<IMovieApiService, MovieApiService>();//создается новы
 //builder.Services.AddSingleton<MovieApiService>();//обращение к классу один на весь проек все обращения идут к нему после использования уничтожается
 builder.Services.AddHttpClient();
 builder.Services.AddMemoryCache();//подключение кыширования
+
+
+
 builder.Services.Configure<MovieApiOptions>(options =>
 {
 	options.ApiKey = builder.Configuration["MovieApi:ApiKey"];
 	options.BaseUrl = builder.Configuration["MovieApi:BaseUrl"];
 
 });
+
+
 
 Console.WriteLine("/////////");
 Console.WriteLine(builder.Configuration.GetSection("MovieApi").GetValue<string>("BaseUrl"));
