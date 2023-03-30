@@ -25,14 +25,15 @@ namespace ASP_Movies.Services
 			this.memoryCache = memoryCache;
 		}
 
-		public async Task<MovieApiResponse> SearchByTitleAsync(string title)
+		public async Task<MovieApiResponse> SearchByTitleAsync(string title, int page = 1)
 		{
 			title = title.ToLower();//все строчные
 
 			MovieApiResponse result;
-			if (!memoryCache.TryGetValue(title, out result))
-			{
-				var response = await httpClient.GetAsync($"{movieApiOptions.BaseUrl}?s={title}&apikey={movieApiOptions.ApiKey}");
+			
+				var response = await httpClient.
+					GetAsync($"{movieApiOptions.BaseUrl}?s={title}&apikey={movieApiOptions.ApiKey}&page={page}");
+
 				result = await response.Content.ReadFromJsonAsync<MovieApiResponse>();
 
 				
@@ -43,7 +44,7 @@ namespace ASP_Movies.Services
 
 				var timeExpire = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromDays(1));//время жизни кэша
 				memoryCache.Set(title, result, timeExpire );
-			}
+			
 
 			return result;
 		}

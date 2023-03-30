@@ -24,13 +24,16 @@ namespace ASP_Movies.Controllers
 		{
 			return View();
 		}
-		public async Task<IActionResult> Search(string title)
+		public async Task<IActionResult> Search(string title, int page = 1)
 		{
 			MovieApiResponse result;
 			try
 			{
 				ViewBag.MovieTitle = title;
-				result = await _movieApiService.SearchByTitleAsync(title);
+				result = await _movieApiService.SearchByTitleAsync(title, page);
+				int totalResult = int.Parse(result.totalResults);
+				ViewBag.TotalTesult = totalResult;
+				ViewBag.TotalPage = Math.Ceiling(totalResult/10.0);
 			}
 			catch (Exception e)
 			{
