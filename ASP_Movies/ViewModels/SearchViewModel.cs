@@ -9,6 +9,7 @@ namespace ASP_Movies.ViewModels
 		public int TotalResult { get; set; }
 		public int TotalPage { get; set; }
 		public int CurrentPage { get; set; }
+		public int SizePages { get; set; }
 		public string Response { get; set; }
 	}
 }

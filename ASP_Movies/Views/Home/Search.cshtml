@@ -4,6 +4,9 @@
 }
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model ASP_Movies.ViewModels.SearchViewModel
+
+
+
 <div>@Model.Response</div>
 @if (!string.IsNullOrWhiteSpace(@Model.Title) && Model.Response.Equals("True"))
 {
@@ -24,7 +27,7 @@
 		<br />
 		<hr />
 		<nav aria-label="Page navigation example">
-			<ul class="pagination">
+			<ul class="pagination d-flex justify-content-center align-content-center">
 				@if (Model.CurrentPage>1)
 				{
 					<li class="page-item">
@@ -35,7 +38,15 @@
 				}
 				
 
-				@for (int i = (Model.CurrentPage> Model.TotalPage-5?Model.TotalPage-10:(Model.CurrentPage>5?Model.CurrentPage-5:1)); i <= (Model.CurrentPage<5?11:(Model.CurrentPage< Model.TotalPage-5 ? Model.CurrentPage+5:Model.TotalPage)); i++)
+				@for (int i = (Model.CurrentPage> Model.TotalPage-Model.SizePages?
+					Model.TotalPage-Model.SizePages*2:
+					(Model.CurrentPage>Model.SizePages?
+						Model.CurrentPage-Model.SizePages:1)); 
+					i <= (Model.CurrentPage<Model.SizePages?
+							Model.SizePages*2+1:
+							(Model.CurrentPage< Model.TotalPage-Model.SizePages ?
+								Model.CurrentPage+Model.SizePages:
+								Model.TotalPage)); i++)
 				{
 					<li class="page-item @(Model.CurrentPage == (i)? "active":"")">
 						<a class="page-link"

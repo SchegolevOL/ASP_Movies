@@ -30,7 +30,8 @@ namespace ASP_Movies.Services
 			title = title.ToLower();//все строчные
 
 			MovieApiResponse result;
-			
+			if (!memoryCache.TryGetValue(title+page, out result))
+			{ 
 				var response = await httpClient.
 					GetAsync($"{movieApiOptions.BaseUrl}?s={title}&apikey={movieApiOptions.ApiKey}&page={page}");
 
@@ -43,8 +44,8 @@ namespace ASP_Movies.Services
 				}
 
 				var timeExpire = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromDays(1));//время жизни кэша
-				memoryCache.Set(title, result, timeExpire );
-			
+				memoryCache.Set(title+page, result, timeExpire );
+			}
 
 			return result;
 		}

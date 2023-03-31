@@ -179,3 +179,28 @@ header .right-menu div a {
     margin-top: 10px;
     font-size: 20px;
 }
+
+.card img{
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+
+.img-container {
+    height: 250px;
+    position: relative;
+}
+
+.card .img-blur {
+    filter: blur(10px);
+    background-position: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+.card {
+    overflow: hidden;
+}

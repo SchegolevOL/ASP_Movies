@@ -9,6 +9,7 @@ namespace ASP_Movies.Controllers
 	public class HomeController : Controller
 	{
 
+		private readonly IRecentMoviesStorage _recentMoviesStorage;
 		private readonly IMovieApiService _movieApiService;
 
 		//public HomeController(ILogger<HomeController> logger)
@@ -16,14 +17,21 @@ namespace ASP_Movies.Controllers
 		//	_logger = logger;
 		//}
 
-		public HomeController(IMovieApiService movieApiService)
+
+
+
+		public HomeController(IMovieApiService movieApiService, IRecentMoviesStorage recentMoviesStorage)
 		{
+			_recentMoviesStorage = recentMoviesStorage;
 			_movieApiService = movieApiService;
 		}
 
+		
+
 		public IActionResult Index()
 		{
-			return View();
+			var recentMovies = _recentMoviesStorage.GetRecentMovies();
+			return View(recentMovies);
 		}
 		public async Task<IActionResult> Search(string title, int page = 1)
 		{
@@ -40,7 +48,8 @@ namespace ASP_Movies.Controllers
 					CurrentPage = page,
 					TotalPage = (int)(Math.Ceiling(totalResult / 10.0)),
 					TotalResult = totalResult,
-					Response = result.Response
+					Response = result.Response,
+					SizePages = 5
 				};
 				
 			}
@@ -55,7 +64,9 @@ namespace ASP_Movies.Controllers
 		
 		public async Task<IActionResult> Detail(string id)
 		{
+			
 			var result = await _movieApiService.SearchByIdAsync(id);
+			_recentMoviesStorage.Add(result);
 			return View(result);
 		}
 
