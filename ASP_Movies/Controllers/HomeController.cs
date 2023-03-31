@@ -1,5 +1,6 @@
 ﻿using ASP_Movies.Models;
 using ASP_Movies.Services;
+using ASP_Movies.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -26,14 +27,22 @@ namespace ASP_Movies.Controllers
 		}
 		public async Task<IActionResult> Search(string title, int page = 1)
 		{
-			MovieApiResponse result;
+			SearchViewModel model;
 			try
 			{
 				ViewBag.MovieTitle = title;
-				result = await _movieApiService.SearchByTitleAsync(title, page);
+				var result = await _movieApiService.SearchByTitleAsync(title, page);
 				int totalResult = int.Parse(result.totalResults);
-				ViewBag.TotalTesult = totalResult;
-				ViewBag.TotalPage = Math.Ceiling(totalResult/10.0);
+				model = new SearchViewModel
+				{
+					Movies = result.Movies,
+					Title = title,
+					CurrentPage = page,
+					TotalPage = (int)(Math.Ceiling(totalResult / 10.0)),
+					TotalResult = totalResult,
+					Response = result.Response
+				};
+				
 			}
 			catch (Exception e)
 			{
@@ -41,7 +50,7 @@ namespace ASP_Movies.Controllers
 				Console.WriteLine(e);
 				throw;
 			}
-			return View(result);
+			return View(model);
 		}
 		
 		public async Task<IActionResult> Detail(string id)
