@@ -35,7 +35,7 @@
 				}
 				
 
-				@for (int i = (Model.CurrentPage>5?Model.CurrentPage-4:1); i <= (Model.CurrentPage< Model.TotalPage-5?Model.CurrentPage+4:Model.TotalPage); i++)
+				@for (int i = (Model.CurrentPage> Model.TotalPage-5?Model.TotalPage-10:(Model.CurrentPage>5?Model.CurrentPage-5:1)); i <= (Model.CurrentPage<5?11:(Model.CurrentPage< Model.TotalPage-5 ? Model.CurrentPage+5:Model.TotalPage)); i++)
 				{
 					<li class="page-item @(Model.CurrentPage == (i)? "active":"")">
 						<a class="page-link"
