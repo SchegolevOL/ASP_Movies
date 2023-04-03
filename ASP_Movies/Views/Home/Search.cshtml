@@ -10,7 +10,7 @@
 <div>@Model.Response</div>
 @if (!string.IsNullOrWhiteSpace(@Model.Title) && Model.Response.Equals("True"))
 {
-	<h1>Movies results by title: @Model.Title (Count : @Model.TotalResult)</h1>
+	<h1>MovieeModels results by title: @Model.Title (Count : @Model.TotalResult)</h1>
 
 	<p>@Model.TotalPage</p>
 	<div class="container">
@@ -18,7 +18,7 @@
 			
 			@foreach (var item in @Model.Movies)
 			{
-				<div class="col">
+				<div class="col-4">
 					<partial name="_MovieCardPartial" model="@item"/>
 				</div>
 			}
@@ -39,11 +39,11 @@
 				
 
 				@for (int i = (Model.CurrentPage> Model.TotalPage-Model.SizePages?
-					Model.TotalPage-Model.SizePages*2:
+					(Model.TotalPage-Model.SizePages*2)+1:
 					(Model.CurrentPage>Model.SizePages?
 						Model.CurrentPage-Model.SizePages:1)); 
 					i <= (Model.CurrentPage<Model.SizePages?
-							Model.SizePages*2+1:
+							Model.SizePages*2:
 							(Model.CurrentPage< Model.TotalPage-Model.SizePages ?
 								Model.CurrentPage+Model.SizePages:
 								Model.TotalPage)); i++)
@@ -76,3 +76,31 @@ else
 {
 	<h3>No results!</h3>
 }
+
+<!-- Button trigger modal -->
+<button type="button" id="myBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+	Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				...
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	
+

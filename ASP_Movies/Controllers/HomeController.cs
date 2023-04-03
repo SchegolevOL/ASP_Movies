@@ -70,6 +70,14 @@ namespace ASP_Movies.Controllers
 			return View(result);
 		}
 
+		public async Task<IActionResult> DetailModal(string id)
+		{
+
+			var result = await _movieApiService.SearchByIdAsync(id);
+			_recentMoviesStorage.Add(result);
+			return PartialView("_MovieModalPartial", result);//верстка без лойаута
+		}
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{

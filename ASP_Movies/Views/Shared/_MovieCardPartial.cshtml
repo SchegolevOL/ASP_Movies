@@ -10,19 +10,24 @@
 	<div class="card-body">
 		<h5 class="card-title">@Model.Title</h5>
 		<p class="card-text">@Model.Year</p>
+		
 		@if (Model.Plot == null)
 		{
 
-			<a class="btn btn-primary"
+
+			<a modal-type="Full" movie="Model"></a>
+			<a modal-type="Modal" movie="Model"></a>
+			
+			@*<a class="btn btn-primary"
 			   asp-controller="Home"
 			   asp-action="Detail"
 			   asp-route-id="@Model.imdbID">
 				Detail
-			</a>
+			</a>*@
 		}
 		else
 		{
-			<circle-link procent="@Model.Ratings[1].Value"></circle-link>
+			@*<circle-link procent="@Model.Ratings[1].Value"></circle-link>*@
 		}
 	</div>
 </div>

@@ -10,14 +10,14 @@
 	
 	 <form method="get" action="/Home/Search" class="input-group p-2 mb-3 mt-100">
 		 <input required type="text" name="title" class="form-control " placeholder="Recipient's movie" aria-label="Recipient's movie" aria-describedby="button-addon2">
-		 <button class="btn btn-success" type="submit" id="button-addon2">Movies</button>
+		 <button class="btn btn-success" type="submit" id="button-addon2">Search</button>
 	 </form>
 	 <hr />
 	 
 	 
 	 @if (@Model.Count() > 0)
 	 {
-<h1>Recent Movies</h1>
+<h1>Recent MovieeModels</h1>
 	 <div class="row">
 		 @foreach (Movie item in @Model)
 		 {

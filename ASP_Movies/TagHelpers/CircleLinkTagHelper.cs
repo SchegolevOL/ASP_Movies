@@ -16,7 +16,7 @@ namespace ASP_Movies.TagHelpers
 				
 				output.TagName = "div";
 				output.Content.AppendHtml($"<div class=\"m-c\">{Procent}<div/>");
-				int procent = Int32.Parse(Procent);
+				int procent=Int32.Parse(Procent);
 				if (procent>0 && procent<=25)
 				{
 					output.AddClass("rotate_90", HtmlEncoder.Default);

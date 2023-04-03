@@ -1,4 +1,15 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$('[data-open-modal]').click(async function () {
 
-// Write your JavaScript code.
+
+    event.preventDefault();
+    $('.modal-body').html(" ");
+    $('#movieModal').modal('show');
+    let url = $(this).attr('href');
+    let response = await fetch(url);
+    let result = await response.text();
+    console.log(result)
+
+    $('.modal-body').html(result);
+
+
+})

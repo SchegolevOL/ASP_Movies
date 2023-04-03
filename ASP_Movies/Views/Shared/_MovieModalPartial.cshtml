@@ -1,0 +1,15 @@
+﻿@model Movie
+
+<div class="row">
+	<div class="col-6">
+		<h1>@Model.Title</h1>
+		<p>@Model.Plot</p>
+		<p>@Model.Awards</p>
+		<p>@Model.Country</p>
+		<p>@Model.Genre</p>
+		<p>@Model.imdbID</p>
+	</div>
+	<div class="col-6">
+		<partial name="_MovieCardPartial" model="@Model"/>
+	</div>
+</div>
