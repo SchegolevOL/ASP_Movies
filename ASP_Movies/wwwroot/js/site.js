@@ -1,4 +1,4 @@
-﻿$('[data-open-modal]').click(async function () {
+﻿$('[data-open-modal]').click(async function (event) {
 
 
     event.preventDefault();
